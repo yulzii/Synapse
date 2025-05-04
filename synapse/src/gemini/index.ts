@@ -6,9 +6,9 @@ import {
   HarmCategory,
 } from "@google/generative-ai";
 const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
-export const gemini = GOOGLE_API_KEY ? new GoogleGenerativeAI(GOOGLE_API_KEY) : null;
-
-// export default gemini;
+export const gemini = GOOGLE_API_KEY
+  ? new GoogleGenerativeAI(GOOGLE_API_KEY)
+  : null;
 
 export const defaultModelName = "gemini-1.5-flash-latest";
 

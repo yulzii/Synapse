@@ -1,7 +1,6 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { Textarea } from "./ui/textarea";
 import { ChangeEvent, useEffect } from "react";
 import { debounceTimeout } from "@/lib/constants";
 import useNote from "@/hooks/useNote";
@@ -35,11 +34,11 @@ function NoteTextInput({ noteId, startingNoteText }: Props) {
     }, debounceTimeout);
   };
   return (
-    <Textarea
+    <textarea
       value={noteText}
       onChange={handleUpdateNote}
       placeholder="Type your note here"
-      className="custom-scrollbar placeholder:text-muted-foreground mb-4 h-full max-w-4xl resize-none border p-4 focus-visible:ring-0 focus-visible:ring-offset-0"
+      className="custom-scrollbar background-color:blue mb-2 h-full resize-none border-none focus:border-none focus:outline-none"
     />
   );
 }

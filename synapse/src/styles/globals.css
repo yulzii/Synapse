@@ -121,4 +121,8 @@
   }
 }
 
-
+div[contenteditable]:empty:before {
+  content: attr(data-placeholder);
+  color: #aaa;
+  pointer-events: none;
+}

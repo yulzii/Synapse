@@ -16,6 +16,7 @@ import { Textarea } from "./ui/textarea";
 import { ArrowUpIcon } from "lucide-react";
 import { askAIAboutNotesAction } from "@/actions/notes";
 import "@/styles/ai-response.css";
+import CopyCodeButton from './CopyCodeButton'; // Adjust path
 
 type Props = {
   user: User | null;

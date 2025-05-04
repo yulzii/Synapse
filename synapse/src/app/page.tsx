@@ -2,6 +2,7 @@ import { getUser } from "@/auth/server";
 import AskAIButton from "@/components/AskAIButton";
 import NewNoteButton from "@/components/NewNoteButton";
 import NoteTextInput from "@/components/NoteTextInput";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 import { prisma } from "@/db/prisma";
 
 type Props = {
@@ -27,10 +28,15 @@ async function HomePage({ searchParams }: Props) {
   });
 
   return (
-    <div className="flex h-full flex-col items-center gap-4">
-      <div className="msc-w-4xl flex w-full justify-end gap-2">
-        <AskAIButton user={user} api_key_configured={api_key_configured} />
-        <NewNoteButton user={user} />
+    <div className="mt-0 flex h-full flex-col gap-4">
+      <div className="flex w-full justify-between">
+        <div>
+          <SidebarTrigger />
+        </div>
+        <div className="flex gap-2">
+          <AskAIButton user={user} api_key_configured={api_key_configured} />
+          <NewNoteButton user={user} />
+        </div>
       </div>
 
       <NoteTextInput noteId={noteId} startingNoteText={note?.content || ""} />

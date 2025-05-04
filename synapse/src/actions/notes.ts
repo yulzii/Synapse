@@ -8,7 +8,12 @@ import {
   HarmBlockThreshold,
   Content,
 } from "@google/generative-ai";
-import { gemini } from "@/gemini";
+import {
+  gemini,
+  defaultModelName,
+  defaultGenerationConfig,
+  defaultSafetySettings,
+} from "@/gemini";
 
 export const updateNoteAction = async (noteId: string, content: string) => {
   try {
@@ -83,33 +88,6 @@ export const askAIAboutNotesAction = async (
   if (notes.length === 0) {
     return "You don't have any notes yet.";
   }
-  // Optional: Configure generation parameters (adjust as needed)
-  const generationConfig = {
-    temperature: 0.7, // Controls randomness (0=deterministic, 1=max random)
-    topK: 1, // Consider the top K most likely words
-    topP: 1, // Consider words comprising the top P probability mass
-    maxOutputTokens: 2048, // Maximum length of the response
-  };
-
-  // Optional: Configure safety settings (adjust thresholds as needed)
-  const safetySettings = [
-    {
-      category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-    },
-    {
-      category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-    },
-    {
-      category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-    },
-    {
-      category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-      threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-    },
-  ];
 
   const formattedNotes = notes
     .map((note) =>
@@ -181,10 +159,10 @@ export const askAIAboutNotesAction = async (
 
   // 4. Select the Gemini Model
   const model = gemini.getGenerativeModel({
-    model: "gemini-1.5-flash-latest", // Recommended free, fast model
-    systemInstruction, // Pass the system instructions
-    generationConfig,
-    safetySettings,
+    model: defaultModelName,
+    systemInstruction,
+    generationConfig: defaultGenerationConfig,
+    safetySettings: defaultSafetySettings,
   });
   // return completion.choices[0].message.content || "A problem has occurred";
   try {

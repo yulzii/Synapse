@@ -5,13 +5,15 @@ import {
   SidebarGroupContent as SidebarGroupContentShadCN,
   SidebarMenu,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
-import { SearchIcon } from "lucide-react";
+import { ChevronsLeft, SearchIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useState, useEffect, useMemo } from "react";
 import Fuse from "fuse.js";
 import SelectNoteButton from "./SelectNoteButton";
 import DeleteNoteButton from "./DeleteNoteButton";
+import { Button } from "./ui/button";
 
 type Props = {
   notes: Note[];
@@ -42,9 +44,17 @@ function SidebarGroupContent({ notes }: Props) {
       prevNotes.filter((note) => note.id !== noteId),
     );
   };
+  const { toggleSidebar } = useSidebar();
 
   return (
     <SidebarGroupContentShadCN>
+      <Button
+        className="absolute top-7 right-2 size-8 -translate-y-1/2 p-0 opacity-50 hover:opacity-100"
+        variant="ghost"
+        onClick={toggleSidebar}
+      >
+        <ChevronsLeft />
+      </Button>
       <div className="relative flex items-center">
         <SearchIcon className="absolute left-2 size-4" />
         <Input
